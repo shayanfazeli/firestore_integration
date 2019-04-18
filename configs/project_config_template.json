@@ -1,0 +1,20 @@
+{
+  "paths": {
+    "google_key_path": "/tmp/service_key.json",
+    "temporary_output_storage_folder": "/tmp/outputput_storage_folder"
+  },
+
+  "collection_ids": [
+    {"collection_id": "collection_id"}
+  ],
+
+  "prune_temporary_output_storage_folder": {
+    "start_date": "2019-04-14",
+    "end_date": "2019-04-18"
+  },
+
+  "dates": [
+    {"date": "2019-04-16"}
+  ]
+
+}
