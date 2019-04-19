@@ -29,12 +29,14 @@ def build_client(google_key_path):
 
 def query_id_data_for_date(db, collection_id, date, temporary_output_storage=None):
     ref = db.collection(collection_id)
-    ref = ref.where(u'StartDate', u'==', get_yesterday_date())
+    ref = ref.where(u'StartDate', u'==', date)
     docs = list(ref.get())
     docs = [doc.to_dict() for doc in docs]
     if temporary_output_storage is None:
         return docs
     else:
+        if not os.path.isdir(temporary_output_storage):
+            os.makedirs(temporary_output_storage)
         if not os.path.isdir(os.path.join(temporary_output_storage, date.replace('-', '_'))):
             os.makedirs(os.path.join(temporary_output_storage, date.replace('-', '_')))
         with open(os.path.join(temporary_output_storage, date.replace('-', '_'), collection_id + '.pkl'), 'wb') as fid_pkl:

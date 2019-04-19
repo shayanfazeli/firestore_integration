@@ -1,0 +1,4 @@
+google-cloud-datastore
+google-cloud-storage
+firebase-admin
+numpy
