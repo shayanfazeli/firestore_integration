@@ -5,6 +5,7 @@ import json
 import argparse
 from libraries.firestore.utils import *
 import os
+from libraries.post_processing.post_processing import *
 
 
 if __name__ == '__main__':
@@ -25,7 +26,9 @@ if __name__ == '__main__':
     else:
         dates = [e['date'] for e in config['dates']]
 
-    temporary_output_storage_folder = config['paths']['temporary_output_storage_folder']
+    temporary_output_storage_folder = os.path.abspath(config['paths']['temporary_output_storage_folder'])
+    if not os.path.isdir(temporary_output_storage_folder):
+        os.makedirs(temporary_output_storage_folder)
 
     if config['prune_temporary_output_storage_folder'] is not None:
         prune_temporary_output_storage(
@@ -42,5 +45,7 @@ if __name__ == '__main__':
                 date=date,
                 temporary_output_storage=os.path.abspath(temporary_output_storage_folder)
             )
+
+    post_process_all(temporary_output_storage_folder)
 
     print('\nFetching procedure is now complete and the folder is refreshed.\n')
